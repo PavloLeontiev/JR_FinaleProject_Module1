@@ -12,7 +12,7 @@ public class Main {
         ////// PART 1 InputValidation ///////
         String[] arg = new String[3];
         arg[0] = "DECRYPT";
-        arg[1] = "fileIn.txt";
+        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\fileIn.txt";
         arg[2] = "3";
         System.out.println("Please, type some arguments: ENCRYPT/DECRYPT/BRUTE_FORCE, file name and key.");
         UserData user1 = new UserData();

@@ -22,10 +22,10 @@ public class InputValidation {
     private void initializeFields(String[] args){
         for (int i = 0; i < args.length; i++) {
             switch (i) {
-                case 0 : mode = args[i];
-                case 1 : filepath = args[i];
-                case 2 : key = args[i];
-                // default: throw new ArrayIndexOutOfBoundsException();
+                case 0 : mode = args[i]; break;
+                case 1 : filepath = args[i]; break;
+                case 2 : key = args[i]; break;
+                default: throw new ArrayIndexOutOfBoundsException();
             }
         }
     }
@@ -39,9 +39,12 @@ public class InputValidation {
     private Mode initializeMode(){
         Mode chooseMode = null;
         switch (mode){
-            case "ENCRYPT" : chooseMode = Mode.ENCRYPT; break;
-            case "DECRYPT" : chooseMode = Mode.DECRYPT; break;
-            case "BRUTE_FORCE" : chooseMode = Mode.BRUTE_FORCE; break;
+            case "ENCRYPT" : chooseMode = Mode.ENCRYPT;
+                break;
+            case "DECRYPT" : chooseMode = Mode.DECRYPT;
+                break;
+            case "BRUTE_FORCE" : chooseMode = Mode.BRUTE_FORCE;
+                break;
             default: throw new IllegalArgumentException("Choose MODE from this list: ENCRYPT/DECRYPT/BRUTE_FORCE");
         }
         return chooseMode;

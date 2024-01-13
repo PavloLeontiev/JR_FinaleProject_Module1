@@ -6,28 +6,10 @@ import java.io.File;
 import java.nio.file.Path;
 
 public class UserData {
-    private File fileIn;
-    private File fileOut;
     private String filePath;
     private Algorythm algorythm;
     private Mode mode;
     private int key;
-
-    public File getFileIn() {
-        return fileIn;
-    }
-
-    public void setFileIn(File fileIn) {
-        this.fileIn = fileIn;
-    }
-
-    public File getFileOut() {
-        return fileOut;
-    }
-
-    public void setFileOut(File fileOut) {
-        this.fileOut = fileOut;
-    }
 
     public String getFilePath() {
         return filePath;
