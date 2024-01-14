@@ -1,6 +1,8 @@
 package main.utils;
 
-import static main.utils.Mode.*;
+import main.utils.modes.AlgorithmMode;
+import main.utils.modes.CipherMode;
+
 public class InputValidation {
     private static InputValidation instance = null;
     private String mode;
@@ -31,22 +33,10 @@ public class InputValidation {
     }
 
     private void initializeUserData(UserData userData){
-        userData.setMode(initializeMode());
+        userData.setCipherMode(CipherMode.initializeMode(mode, userData));
         userData.setFilePath(filepath);
         userData.setKey(Integer.parseInt(key));
+        userData.setAlgorithmMode(AlgorithmMode.CAESARCIPHER); // by default
     }
 
-    private Mode initializeMode(){
-        Mode chooseMode = null;
-        switch (mode){
-            case "ENCRYPT" : chooseMode = Mode.ENCRYPT;
-                break;
-            case "DECRYPT" : chooseMode = Mode.DECRYPT;
-                break;
-            case "BRUTE_FORCE" : chooseMode = Mode.BRUTE_FORCE;
-                break;
-            default: throw new IllegalArgumentException("Choose MODE from this list: ENCRYPT/DECRYPT/BRUTE_FORCE");
-        }
-        return chooseMode;
-    }
 }

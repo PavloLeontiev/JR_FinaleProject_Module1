@@ -1,14 +1,12 @@
 package main.utils;
 
-import main.encryption.Algorythm;
-
-import java.io.File;
-import java.nio.file.Path;
+import main.utils.modes.AlgorithmMode;
+import main.utils.modes.CipherMode;
 
 public class UserData {
     private String filePath;
-    private Algorythm algorythm;
-    private Mode mode;
+    private CipherMode cipherMode;
+    private AlgorithmMode algorithmMode;
     private int key;
 
     public String getFilePath() {
@@ -19,20 +17,21 @@ public class UserData {
         this.filePath = filePath;
     }
 
-    public Algorythm getAlgorythm() {
-        return algorythm;
+
+    public CipherMode getCipherMode() {
+        return cipherMode;
     }
 
-    public void setAlgorythm(Algorythm algorythm) {
-        this.algorythm = algorythm;
+    public void setCipherMode(CipherMode cipherMode) {
+        this.cipherMode = cipherMode;
     }
 
-    public Mode getMode() {
-        return mode;
+    public AlgorithmMode getAlgorithmMode() {
+        return algorithmMode;
     }
 
-    public void setMode(Mode mode) {
-        this.mode = mode;
+    public void setAlgorithmMode(AlgorithmMode algorithmMode) {
+        this.algorithmMode = algorithmMode;
     }
 
     public int getKey() {

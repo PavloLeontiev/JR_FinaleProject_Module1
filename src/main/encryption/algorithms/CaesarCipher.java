@@ -1,6 +1,7 @@
 package main.encryption.algorithms;
 
-import main.encryption.Algorythm;
+import main.utils.Languages.English;
 
 public class CaesarCipher {
+
 }
