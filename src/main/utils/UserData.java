@@ -1,38 +1,76 @@
 package main.utils;
 
-import main.encryption.Algorythm;
+import main.encryption.algorithms.Algorithm;
+import main.utils.modes.CipherMode;
 
-import java.io.File;
-import java.nio.file.Path;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 public class UserData {
-    private String filePath;
-    private Algorythm algorythm;
-    private Mode mode;
+    private String filePathRead;
+    private String filePathWrite;
+    private FileChannel fileChannelRead;
+    private FileChannel fileChannelWrite;
+    private ByteBuffer byteBuffer;
+    private CipherMode cipherMode;
+    private Algorithm algorithm;
     private int key;
+    private int fileSize;
 
-    public String getFilePath() {
-        return filePath;
+    public String getFilePathRead() {
+        return filePathRead;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFilePathRead(String filePathRead) {
+        this.filePathRead = filePathRead;
     }
 
-    public Algorythm getAlgorythm() {
-        return algorythm;
+    public String getFilePathWrite() {
+        return filePathWrite;
     }
 
-    public void setAlgorythm(Algorythm algorythm) {
-        this.algorythm = algorythm;
+    public void setFilePathWrite(String filePathWrite) {
+        this.filePathWrite = filePathWrite;
     }
 
-    public Mode getMode() {
-        return mode;
+    public FileChannel getFileChannelRead() {
+        return fileChannelRead;
     }
 
-    public void setMode(Mode mode) {
-        this.mode = mode;
+    public void setFileChannelRead(FileChannel fileChannelRead) {
+        this.fileChannelRead = fileChannelRead;
+    }
+
+    public FileChannel getFileChannelWrite() {
+        return fileChannelWrite;
+    }
+
+    public void setFileChannelWrite(FileChannel fileChannelWrite) {
+        this.fileChannelWrite = fileChannelWrite;
+    }
+
+    public ByteBuffer getByteBuffer() {
+        return byteBuffer;
+    }
+
+    public void setByteBuffer(ByteBuffer byteBuffer) {
+        this.byteBuffer = byteBuffer;
+    }
+
+    public CipherMode getCipherMode() {
+        return cipherMode;
+    }
+
+    public void setCipherMode(CipherMode cipherMode) {
+        this.cipherMode = cipherMode;
+    }
+
+    public Algorithm getAlgorithm() {
+        return algorithm;
+    }
+
+    public void setAlgorithm(Algorithm algorithm) {
+        this.algorithm = algorithm;
     }
 
     public int getKey() {
@@ -41,5 +79,13 @@ public class UserData {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public int getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(int fileSize) {
+        this.fileSize = fileSize;
     }
 }

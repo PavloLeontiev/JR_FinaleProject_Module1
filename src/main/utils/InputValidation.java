@@ -1,11 +1,13 @@
 package main.utils;
 
-import static main.utils.Mode.*;
+import main.encryption.algorithms.CaesarCipher;
+import main.utils.modes.CipherMode;
+
 public class InputValidation {
-    private static InputValidation instance = null;
     private String mode;
-    private String filepath;
+    private String filePath;
     private String key;
+    private static InputValidation instance = null;
     private InputValidation(){}
 
     public static InputValidation getInstance(){
@@ -23,7 +25,7 @@ public class InputValidation {
         for (int i = 0; i < args.length; i++) {
             switch (i) {
                 case 0 : mode = args[i]; break;
-                case 1 : filepath = args[i]; break;
+                case 1 : filePath = args[i]; break;
                 case 2 : key = args[i]; break;
                 default: throw new ArrayIndexOutOfBoundsException();
             }
@@ -31,22 +33,10 @@ public class InputValidation {
     }
 
     private void initializeUserData(UserData userData){
-        userData.setMode(initializeMode());
-        userData.setFilePath(filepath);
+        userData.setCipherMode(CipherMode.initializeMode(mode, userData));
+        userData.setFilePathRead(filePath);
         userData.setKey(Integer.parseInt(key));
+        userData.setAlgorithm(CaesarCipher.getInstance()); // by default
     }
 
-    private Mode initializeMode(){
-        Mode chooseMode = null;
-        switch (mode){
-            case "ENCRYPT" : chooseMode = Mode.ENCRYPT;
-                break;
-            case "DECRYPT" : chooseMode = Mode.DECRYPT;
-                break;
-            case "BRUTE_FORCE" : chooseMode = Mode.BRUTE_FORCE;
-                break;
-            default: throw new IllegalArgumentException("Choose MODE from this list: ENCRYPT/DECRYPT/BRUTE_FORCE");
-        }
-        return chooseMode;
-    }
 }
