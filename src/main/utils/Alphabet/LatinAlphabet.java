@@ -1,10 +1,10 @@
-package main.utils.Languages;
+package main.utils.Alphabet;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class English {
-        private static English instance = null;
+public class LatinAlphabet {
+        private static LatinAlphabet instance = null;
         private int numberOfLettersAlphabet = 26;
         private Character[] alphabet = {
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
@@ -14,13 +14,13 @@ public class English {
         };
         private List<Character> alphabetList = Arrays.asList(alphabet);
 
-        private English(){
+        private LatinAlphabet(){
             System.out.println("SingletonEN is created!");
         }
 
-        public static English getInstance(){
+        public static LatinAlphabet getInstance(){
             if(instance == null){
-                instance = new English();
+                instance = new LatinAlphabet();
             }
             return instance;
         }

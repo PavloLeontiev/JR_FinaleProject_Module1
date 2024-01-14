@@ -1,22 +1,61 @@
 package main.utils;
 
-import main.utils.modes.AlgorithmMode;
+import main.encryption.algorithms.Algorithm;
 import main.utils.modes.CipherMode;
 
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+
 public class UserData {
-    private String filePath;
+    private String filePathRead;
+    private String filePathWrite;
+    private FileChannel fileChannelRead;
+    private FileChannel fileChannelWrite;
+    private ByteBuffer byteBuffer;
     private CipherMode cipherMode;
-    private AlgorithmMode algorithmMode;
+    private Algorithm algorithm;
     private int key;
+    private int fileSize;
 
-    public String getFilePath() {
-        return filePath;
+    public String getFilePathRead() {
+        return filePathRead;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFilePathRead(String filePathRead) {
+        this.filePathRead = filePathRead;
     }
 
+    public String getFilePathWrite() {
+        return filePathWrite;
+    }
+
+    public void setFilePathWrite(String filePathWrite) {
+        this.filePathWrite = filePathWrite;
+    }
+
+    public FileChannel getFileChannelRead() {
+        return fileChannelRead;
+    }
+
+    public void setFileChannelRead(FileChannel fileChannelRead) {
+        this.fileChannelRead = fileChannelRead;
+    }
+
+    public FileChannel getFileChannelWrite() {
+        return fileChannelWrite;
+    }
+
+    public void setFileChannelWrite(FileChannel fileChannelWrite) {
+        this.fileChannelWrite = fileChannelWrite;
+    }
+
+    public ByteBuffer getByteBuffer() {
+        return byteBuffer;
+    }
+
+    public void setByteBuffer(ByteBuffer byteBuffer) {
+        this.byteBuffer = byteBuffer;
+    }
 
     public CipherMode getCipherMode() {
         return cipherMode;
@@ -26,12 +65,12 @@ public class UserData {
         this.cipherMode = cipherMode;
     }
 
-    public AlgorithmMode getAlgorithmMode() {
-        return algorithmMode;
+    public Algorithm getAlgorithm() {
+        return algorithm;
     }
 
-    public void setAlgorithmMode(AlgorithmMode algorithmMode) {
-        this.algorithmMode = algorithmMode;
+    public void setAlgorithm(Algorithm algorithm) {
+        this.algorithm = algorithm;
     }
 
     public int getKey() {
@@ -40,5 +79,13 @@ public class UserData {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public int getFileSize() {
+        return fileSize;
+    }
+
+    public void setFileSize(int fileSize) {
+        this.fileSize = fileSize;
     }
 }

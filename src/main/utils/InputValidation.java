@@ -1,13 +1,13 @@
 package main.utils;
 
-import main.utils.modes.AlgorithmMode;
+import main.encryption.algorithms.CaesarCipher;
 import main.utils.modes.CipherMode;
 
 public class InputValidation {
-    private static InputValidation instance = null;
     private String mode;
-    private String filepath;
+    private String filePath;
     private String key;
+    private static InputValidation instance = null;
     private InputValidation(){}
 
     public static InputValidation getInstance(){
@@ -25,7 +25,7 @@ public class InputValidation {
         for (int i = 0; i < args.length; i++) {
             switch (i) {
                 case 0 : mode = args[i]; break;
-                case 1 : filepath = args[i]; break;
+                case 1 : filePath = args[i]; break;
                 case 2 : key = args[i]; break;
                 default: throw new ArrayIndexOutOfBoundsException();
             }
@@ -34,9 +34,9 @@ public class InputValidation {
 
     private void initializeUserData(UserData userData){
         userData.setCipherMode(CipherMode.initializeMode(mode, userData));
-        userData.setFilePath(filepath);
+        userData.setFilePathRead(filePath);
         userData.setKey(Integer.parseInt(key));
-        userData.setAlgorithmMode(AlgorithmMode.CAESARCIPHER); // by default
+        userData.setAlgorithm(CaesarCipher.getInstance()); // by default
     }
 
 }
