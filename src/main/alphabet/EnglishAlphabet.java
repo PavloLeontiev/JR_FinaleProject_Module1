@@ -3,30 +3,42 @@ package main.alphabet;
 import java.util.HashMap;
 
 public class EnglishAlphabet extends Alphabet{
-
-    private HashMap<Character, Character> alphabetMap = new HashMap<>();
-
+    private final HashMap<Character, Character> alphabetCapitalLetters = new HashMap<>();
+    private final HashMap<Character, Character> alphabetSmallLetters = new HashMap<>();
+    public HashMap<Character, Character> getAlphabetCapitalLetters(){
+        return alphabetCapitalLetters;
+    }
+    public HashMap<Character, Character> getAlphabetSmallLetters(){
+        return alphabetSmallLetters;
+    }
     public void initializeAlphabet(int key){
-        System.out.println(91%90);
+        initializeAlphabetCapitalLetters(key);
+        initializeAlphabetSmallLetters(key);
+    }
+
+    private void initializeAlphabetCapitalLetters(int key){
         int modifyChar = 0;
         int firstByteAlphabet = 65;
         int lastByteAlphabet = 90;
         int consistLetters = 26;
         for (int i = 1; i <= consistLetters; i++) {
             modifyChar = firstByteAlphabet + key;
-            alphabetMap.put((char)firstByteAlphabet, (char)(modifyChar > lastByteAlphabet ? modifyChar % lastByteAlphabet + 64 : modifyChar));
+            alphabetCapitalLetters.put((char)firstByteAlphabet,
+                    (char)(modifyChar > lastByteAlphabet ? modifyChar % lastByteAlphabet + 64 : modifyChar));
             firstByteAlphabet++;
         }
-
-        // Виводить зміст HashMap
-        System.out.println("Алфавит в структуре данных HashMap:");
-        for (char ch : alphabetMap.keySet()) {
-            char value = alphabetMap.get(ch);
-            System.out.println(ch + ": " + value);
-        }
     }
+    private void initializeAlphabetSmallLetters(int key){
+        int modifyChar = 0;
+        int firstByteAlphabet = 97;
+        int lastByteAlphabet = 122;
+        int consistLetters = 26;
 
-    public HashMap<Character, Character> getAlphabet(){
-        return alphabetMap;
+        for (int i = 1; i <= consistLetters; i++, firstByteAlphabet++) {
+            modifyChar = (char)firstByteAlphabet + key;
+            alphabetSmallLetters.put((char)firstByteAlphabet,
+                    (char)(modifyChar > lastByteAlphabet ? modifyChar % lastByteAlphabet + 96 : modifyChar));
+        }
+
     }
 }
