@@ -1,42 +1,35 @@
 package main.utils;
 
-import main.encryption.algorithms.CaesarCipher;
-import main.utils.modes.CipherMode;
+import main.alphabet.EnglishAlphabet;
+import main.encryption.UserData;
+import main.encryption.cipher_algorithm.CaesarCipher;
+import main.encryption.cipher_algorithm.CipherAlgorithm;
+import main.encryption.cipher_algorithm.VisenereCipher;
+import main.modes.CipherMode;
 
 public class InputValidation {
-    private String mode;
-    private String filePath;
-    private String key;
-    private static InputValidation instance = null;
-    private InputValidation(){}
-
-    public static InputValidation getInstance(){
-        if (instance == null){
-            instance = new InputValidation();
-        }
-        return instance;
-    }
-    public void validation(UserData userData, String[] args){
-        initializeFields(args);
-        initializeUserData(userData);
-    }
-
-    private void initializeFields(String[] args){
+    public static void validation(UserData userData, String[] args){
         for (int i = 0; i < args.length; i++) {
             switch (i) {
-                case 0 : mode = args[i]; break;
-                case 1 : filePath = args[i]; break;
-                case 2 : key = args[i]; break;
+                case 0 : userData.setCipherMode(CipherMode.initializeMode(args[i])); break;
+                case 1 : userData.setFilePathRead(args[i]); break;
+                case 2 : userData.setCipherAlgorithm(validationAlgorithm(args[i]));
+                         userData.setKey(args[i]); break;
                 default: throw new ArrayIndexOutOfBoundsException();
             }
+            userData.setAlphabet(new EnglishAlphabet()); // by default
         }
     }
 
-    private void initializeUserData(UserData userData){
-        userData.setCipherMode(CipherMode.initializeMode(mode, userData));
-        userData.setFilePathRead(filePath);
-        userData.setKey(Integer.parseInt(key));
-        userData.setAlgorithm(CaesarCipher.getInstance()); // by default
+
+    private static CipherAlgorithm validationAlgorithm(String key){
+        if(key.matches("^[0-9]")){
+            return new CaesarCipher();
+        } else if(key.matches("^[a-zA-Z]*$")){
+            return new VisenereCipher();
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 
 }

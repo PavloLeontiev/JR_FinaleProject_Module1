@@ -1,21 +1,22 @@
-package main.utils;
+package main.encryption;
 
-import main.encryption.algorithms.Algorithm;
-import main.utils.modes.CipherMode;
+import main.alphabet.Alphabet;
+import main.encryption.cipher_algorithm.CipherAlgorithm;
+import main.modes.CipherMode;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class UserData {
-    private String filePathRead;
-    private String filePathWrite;
-    private FileChannel fileChannelRead;
-    private FileChannel fileChannelWrite;
-    private ByteBuffer byteBuffer;
-    private CipherMode cipherMode;
-    private Algorithm algorithm;
-    private int key;
-    private int fileSize;
+    protected String filePathRead;
+    protected String filePathWrite;
+    protected FileChannel fileChannelRead;
+    protected FileChannel fileChannelWrite;
+    protected ByteBuffer byteBuffer;
+    protected CipherMode cipherMode;
+    protected CipherAlgorithm cipherAlgorithm;
+    protected Alphabet alphabet;
+    protected String key;
 
     public String getFilePathRead() {
         return filePathRead;
@@ -53,8 +54,8 @@ public class UserData {
         return byteBuffer;
     }
 
-    public void setByteBuffer(ByteBuffer byteBuffer) {
-        this.byteBuffer = byteBuffer;
+    public void setByteBuffer(ByteBuffer byteBufferRead) {
+        this.byteBuffer = byteBufferRead;
     }
 
     public CipherMode getCipherMode() {
@@ -65,27 +66,28 @@ public class UserData {
         this.cipherMode = cipherMode;
     }
 
-    public Algorithm getAlgorithm() {
-        return algorithm;
+    public CipherAlgorithm getCipherAlgorithm() {
+        return cipherAlgorithm;
     }
 
-    public void setAlgorithm(Algorithm algorithm) {
-        this.algorithm = algorithm;
+    public void setCipherAlgorithm(CipherAlgorithm cipherAlgorithm) {
+        this.cipherAlgorithm = cipherAlgorithm;
     }
 
-    public int getKey() {
+    public Alphabet getAlphabet() {
+        return alphabet;
+    }
+
+    public void setAlphabet(Alphabet alphabet) {
+        this.alphabet = alphabet;
+    }
+
+    public String getKey() {
         return key;
     }
 
-    public void setKey(int key) {
+    public void setKey(String key) {
         this.key = key;
     }
 
-    public int getFileSize() {
-        return fileSize;
-    }
-
-    public void setFileSize(int fileSize) {
-        this.fileSize = fileSize;
-    }
 }
