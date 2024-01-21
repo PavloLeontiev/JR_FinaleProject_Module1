@@ -1,7 +1,5 @@
 package main.utils;
 
-import main.alphabet.EnglishAlphabet;
-import main.alphabet.UkrainianAlphabet;
 import main.encryption.UserData;
 import main.encryption.cipher_algorithm.CaesarCipher;
 import main.encryption.cipher_algorithm.CipherAlgorithm;
@@ -18,7 +16,6 @@ public class InputValidation {
                          userData.setKey(args[i]); break;
                 default: throw new ArrayIndexOutOfBoundsException();
             }
-            // userData.setAlphabet(new UkrainianAlphabet()); // by default
         }
     }
 

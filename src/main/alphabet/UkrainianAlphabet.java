@@ -36,11 +36,6 @@ public class UkrainianAlphabet extends Alphabet{
             modifyIndex = i + key;
             alphabetCapitalLetters.put(alphabet[i], modifyIndex >= 33 ? alphabet[modifyIndex % 33] : alphabet[modifyIndex]);
         }
-        System.out.println("Алфавіт української мови в структурі даних HashMap:");
-        for (char k : alphabetCapitalLetters.keySet()) {
-            char value = alphabetCapitalLetters.get(k);
-            System.out.println(k + ": " + value);
-        }
     }
     private void initializeAlphabetSmallLetters(int key){
         char[] alphabet = lowercaseUkrainianAlphabetArray;
@@ -48,11 +43,6 @@ public class UkrainianAlphabet extends Alphabet{
         for (int i = 0; i < 33; i++) {
             modifyIndex = i + key;
             alphabetSmallLetters.put(alphabet[i], modifyIndex >= 33 ? alphabet[modifyIndex % 33] : alphabet[modifyIndex]);
-        }
-        System.out.println("Алфавіт української мови в структурі даних HashMap:");
-        for (char k : alphabetSmallLetters.keySet()) {
-            char value = alphabetSmallLetters.get(k);
-            System.out.println(k + ": " + value);
         }
     }
     public boolean isLetter (char ch){

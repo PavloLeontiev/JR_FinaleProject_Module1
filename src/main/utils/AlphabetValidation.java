@@ -1,7 +1,6 @@
 package main.utils;
 
 import main.alphabet.Alphabet;
-import main.alphabet.EnglishAlphabet;
 import main.encryption.UserData;
 
 import java.io.*;
@@ -18,7 +17,6 @@ public class AlphabetValidation {
                 validationContent(alphabets, userData.getFileReader(), userData.getReader()
                 )
         );
-        System.out.println(userData.getAlphabet());
     }
 
     private static Alphabet validationContent(ArrayList<Alphabet> alphabets, FileReader fileReader, BufferedReader reader){
@@ -35,8 +33,6 @@ public class AlphabetValidation {
                 else if(alphabets.get(1).isLetter(ch)) // UkrainianAlphabet
                     numberOfUkrainianLetters++;
             }
-            System.out.println("Number of English letters: " + numberOfEnglishLetters);
-            System.out.println("Number of Ukrainian letters: " + numberOfUkrainianLetters);
             if(numberOfEnglishLetters > numberOfUkrainianLetters) {
                 return alphabets.get(0); // EnglishAlphabet
             } else {

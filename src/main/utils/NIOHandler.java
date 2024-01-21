@@ -3,9 +3,6 @@ package main.utils;
 import main.encryption.UserData;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-
 public class NIOHandler {
 
     public static void initializeFileStreams(UserData userData){
