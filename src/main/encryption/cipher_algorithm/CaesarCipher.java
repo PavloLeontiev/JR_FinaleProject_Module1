@@ -5,7 +5,6 @@ import main.alphabet.Alphabet;
 import java.util.HashMap;
 
 public class CaesarCipher extends CipherAlgorithm{
-    private int key;
     private HashMap<Character, Character> alphabetCapitalLetters;
     private HashMap<Character, Character> alphabetSmallLetters;
     private void initializeAlphabet(Alphabet alphabet, String sKey){
@@ -15,21 +14,21 @@ public class CaesarCipher extends CipherAlgorithm{
     }
 
     @Override
-    public byte[] encrypt(byte[] bytes, Alphabet alphabet, String sKey, int bytesRead) {
-        byte currentByte = 0;
-        byte[] encryptedBytes = new byte[bytes.length];
+    public char[] encrypt(char[] bytes, Alphabet alphabet, String sKey, int bytesRead) {
+        char currentByte = 0;
+        char[] encryptedBytes = new char[bytes.length];
 
         initializeAlphabet(alphabet, sKey);
 
         for(int i = 0; i < bytesRead; i++){
             currentByte = bytes[i];
-            if(Character.isLetter(currentByte)){
-                if(Character.isUpperCase(currentByte)){
-                    char currentChar = alphabetCapitalLetters.get((char)currentByte);
-                    encryptedBytes[i] = (byte) currentChar;
-                } else if(Character.isLowerCase(currentByte)){
-                    char currentChar = alphabetSmallLetters.get((char)currentByte);
-                    encryptedBytes[i] = (byte) currentChar;
+            if(alphabet.isLetter(currentByte)){
+                if(alphabet.isUpperCase(currentByte)){
+                    char currentChar = alphabetCapitalLetters.get(currentByte);
+                    encryptedBytes[i] = currentChar;
+                } else if(alphabet.isLowerCase(currentByte)){
+                    char currentChar = alphabetSmallLetters.get(currentByte);
+                    encryptedBytes[i] = currentChar;
                 }
             } else {
                 encryptedBytes[i] = currentByte;
@@ -39,8 +38,8 @@ public class CaesarCipher extends CipherAlgorithm{
     }
 
     @Override
-    public byte[] decrypt(byte[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
-        int key = 26 - (Integer.parseInt(stringKey) % 26);
+    public char[] decrypt(char[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
+        int key = alphabet.getNumberOfLetters() - (Integer.parseInt(stringKey) % alphabet.getNumberOfLetters());
         return encrypt(bytes, alphabet, String.valueOf(key), bytesRead);
     }
 }

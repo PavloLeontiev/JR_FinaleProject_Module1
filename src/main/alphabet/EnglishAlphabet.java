@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class EnglishAlphabet extends Alphabet{
+    private final int numberOfLetters = 26;
     private char[] uppercaseEnglishAlphabetArray = {
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
@@ -32,11 +33,6 @@ public class EnglishAlphabet extends Alphabet{
             modifyIndex = i + key;
             alphabetCapitalLetters.put(alphabet[i], modifyIndex >= 26 ? alphabet[modifyIndex % 26] : alphabet[modifyIndex]);
         }
-        System.out.println("??????? ??????????? ???? ? ????????? ????? HashMap:");
-        for (char k : alphabetCapitalLetters.keySet()) {
-            char value = alphabetCapitalLetters.get(k);
-            System.out.println(k + ": " + value);
-        }
     }
     private void initializeAlphabetSmallLetters(int key){
         char[] alphabet = lowercaseEnglishAlphabetArray;
@@ -45,10 +41,20 @@ public class EnglishAlphabet extends Alphabet{
             modifyIndex = i + key;
             alphabetSmallLetters.put(alphabet[i], modifyIndex >= 26 ? alphabet[modifyIndex % 26] : alphabet[modifyIndex]);
         }
-        System.out.println("??????? ??????????? ???? ? ????????? ????? HashMap:");
-        for (char k : alphabetSmallLetters.keySet()) {
-            char value = alphabetSmallLetters.get(k);
-            System.out.println(k + ": " + value);
-        }
+    }
+    public boolean isLetter (char ch){
+        if(alphabetCapitalLetters.containsKey(ch)) return true;
+        else if (alphabetSmallLetters.containsKey(ch)) return true;
+        else return false;
+    }
+    public boolean isUpperCase (char ch){
+        return alphabetCapitalLetters.containsKey(ch);
+    }
+    public boolean isLowerCase (char ch){
+        return alphabetSmallLetters.containsKey(ch);
+    }
+
+    public int getNumberOfLetters() {
+        return numberOfLetters;
     }
 }

@@ -2,34 +2,38 @@ package main.utils;
 
 import main.encryption.UserData;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class NIOHandler {
 
-    public static void initializeFileChannel(UserData userData){
-        userData.setFileChannelRead(getFileChannel(userData.getFilePathRead()));
-        userData.setFileChannelWrite(getFileChannel(userData.getFilePathWrite()));
+    public static void initializeFileStreams(UserData userData){
+        userData.setFileReader(getFileReader(userData.getFilePathRead()));
+        userData.setFileWriter(getFileWriter(userData.getFilePathWrite()));
+        userData.setReader(initializeReader(userData.getFileReader()));
+        userData.setWriter(initializeWriter(userData.getFileWriter()));
     }
 
-    public static void initializeByteBuffer(UserData userData){
-        userData.setByteBuffer(getByteBuffer());
+    private static BufferedReader initializeReader(FileReader fileReader){
+        return new BufferedReader(fileReader);
     }
-
-    private static FileChannel getFileChannel(String filePath){
+    private static BufferedWriter initializeWriter(FileWriter fileWriter){
+        return new BufferedWriter(fileWriter);
+    }
+    private static FileReader getFileReader(String filePath){
         try{
-            RandomAccessFile aFile = new RandomAccessFile(filePath, "rws");
-            FileChannel channel = aFile.getChannel();
-            return channel;
+            return new FileReader(filePath);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static ByteBuffer getByteBuffer(){
-        return ByteBuffer.allocate(128);
+    private static FileWriter getFileWriter(String filePath){
+        try{
+            return new FileWriter(filePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

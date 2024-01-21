@@ -7,24 +7,20 @@ import java.nio.charset.StandardCharsets;
 public class Cipher extends UserData {
     public void execute(){
         try {
-            int bytesRead = fileChannelRead.read(byteBuffer);
-            byte[] bytes = null;
+            char[] array = new char[128];
+            int bytesRead = reader.read(array);
             while (bytesRead != -1) {
-                bytes = byteBuffer.array();
-                bytes = switch (cipherMode){
-                    case ENCRYPT -> cipherAlgorithm.encrypt(bytes, alphabet, key, bytesRead);
-                    case DECRYPT -> cipherAlgorithm.decrypt(bytes, alphabet, key, bytesRead);
+                array = switch (cipherMode){
+                    case ENCRYPT -> cipherAlgorithm.encrypt(array, alphabet, key, bytesRead);
+                    case DECRYPT -> cipherAlgorithm.decrypt(array, alphabet, key, bytesRead);
                     case BRUTE_FORCE -> throw null;
                 };
-                // Не зрозумів чому не записує у файл при використані byteBuffer = byteBuffer.put(bytes);
-                // Тільки через ByteBuffer.wrap(...);
-                byteBuffer = ByteBuffer.wrap(bytes, 0, bytesRead);
-                fileChannelWrite.write(byteBuffer);
-                byteBuffer.clear();
-                bytesRead = fileChannelRead.read(byteBuffer);
+                writer.write(array, 0, bytesRead);
+                writer.flush();
+                bytesRead = reader.read(array);
             }
-            fileChannelRead.close();
-            fileChannelWrite.close();
+            fileReader.close();
+            fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

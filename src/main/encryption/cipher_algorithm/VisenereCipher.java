@@ -4,12 +4,12 @@ import main.alphabet.Alphabet;
 
 public class VisenereCipher extends CipherAlgorithm{
     @Override
-    public byte[] encrypt(byte[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
-        return new byte[0];
+    public char[] encrypt(char[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
+        return new char[0];
     }
 
     @Override
-    public byte[] decrypt(byte[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
-        return new byte[0];
+    public char[] decrypt(char[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
+        return new char[0];
     }
 }

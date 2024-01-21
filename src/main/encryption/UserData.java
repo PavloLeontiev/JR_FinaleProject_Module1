@@ -4,15 +4,20 @@ import main.alphabet.Alphabet;
 import main.encryption.cipher_algorithm.CipherAlgorithm;
 import main.modes.CipherMode;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class UserData {
     protected String filePathRead;
     protected String filePathWrite;
-    protected FileChannel fileChannelRead;
-    protected FileChannel fileChannelWrite;
-    protected ByteBuffer byteBuffer;
+    protected FileReader fileReader;
+    protected FileWriter fileWriter;
+    protected BufferedReader reader;
+    protected BufferedWriter writer;
     protected CipherMode cipherMode;
     protected CipherAlgorithm cipherAlgorithm;
     protected Alphabet alphabet;
@@ -34,28 +39,36 @@ public class UserData {
         this.filePathWrite = filePathWrite;
     }
 
-    public FileChannel getFileChannelRead() {
-        return fileChannelRead;
+    public FileReader getFileReader() {
+        return fileReader;
     }
 
-    public void setFileChannelRead(FileChannel fileChannelRead) {
-        this.fileChannelRead = fileChannelRead;
+    public void setFileReader(FileReader fileReader) {
+        this.fileReader = fileReader;
     }
 
-    public FileChannel getFileChannelWrite() {
-        return fileChannelWrite;
+    public FileWriter getFileWriter() {
+        return fileWriter;
     }
 
-    public void setFileChannelWrite(FileChannel fileChannelWrite) {
-        this.fileChannelWrite = fileChannelWrite;
+    public void setFileWriter(FileWriter fileWriter) {
+        this.fileWriter = fileWriter;
     }
 
-    public ByteBuffer getByteBuffer() {
-        return byteBuffer;
+    public BufferedReader getReader() {
+        return reader;
     }
 
-    public void setByteBuffer(ByteBuffer byteBufferRead) {
-        this.byteBuffer = byteBufferRead;
+    public void setReader(BufferedReader reader) {
+        this.reader = reader;
+    }
+
+    public BufferedWriter getWriter() {
+        return writer;
+    }
+
+    public void setWriter(BufferedWriter writer) {
+        this.writer = writer;
     }
 
     public CipherMode getCipherMode() {
