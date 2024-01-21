@@ -18,7 +18,7 @@ public class InputValidation {
                          userData.setKey(args[i]); break;
                 default: throw new ArrayIndexOutOfBoundsException();
             }
-            userData.setAlphabet(new UkrainianAlphabet()); // by default
+            // userData.setAlphabet(new UkrainianAlphabet()); // by default
         }
     }
 

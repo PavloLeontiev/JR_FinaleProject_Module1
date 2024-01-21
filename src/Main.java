@@ -1,5 +1,6 @@
 import main.alphabet.UkrainianAlphabet;
 import main.encryption.Cipher;
+import main.utils.AlphabetValidation;
 import main.utils.FileHandler;
 import main.utils.InputValidation;
 import main.utils.NIOHandler;
@@ -31,7 +32,7 @@ public class Main {
 
         FileHandler.fileValidation(user1);
         NIOHandler.initializeFileStreams(user1);
-
+        AlphabetValidation.alphabetInitialize(user1);
         ////// PART 3 Cipher ///////
         user1.execute();
 
