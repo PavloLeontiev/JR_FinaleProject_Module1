@@ -40,7 +40,7 @@ public class CaesarCipher extends CipherAlgorithm{
 
     @Override
     public byte[] decrypt(byte[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
-        String negativeKey = "-" + stringKey;
-        return encrypt(bytes, alphabet, negativeKey, bytesRead);
+        int key = 26 - (Integer.parseInt(stringKey) % 26);
+        return encrypt(bytes, alphabet, String.valueOf(key), bytesRead);
     }
 }

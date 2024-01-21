@@ -1,6 +1,7 @@
 package main.utils;
 
 import main.alphabet.EnglishAlphabet;
+import main.alphabet.UkrainianAlphabet;
 import main.encryption.UserData;
 import main.encryption.cipher_algorithm.CaesarCipher;
 import main.encryption.cipher_algorithm.CipherAlgorithm;
@@ -17,13 +18,13 @@ public class InputValidation {
                          userData.setKey(args[i]); break;
                 default: throw new ArrayIndexOutOfBoundsException();
             }
-            userData.setAlphabet(new EnglishAlphabet()); // by default
+            userData.setAlphabet(new UkrainianAlphabet()); // by default
         }
     }
 
 
     private static CipherAlgorithm validationAlgorithm(String key){
-        if(key.matches("^[0-9]")){
+        if(key.matches("^[0-9]*$")){
             return new CaesarCipher();
         } else if(key.matches("^[a-zA-Z]*$")){
             return new VisenereCipher();

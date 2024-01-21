@@ -1,2 +1,1 @@
-HELLO JAVA!
-hello java!
+Привіт

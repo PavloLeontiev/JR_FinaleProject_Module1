@@ -1,14 +1,23 @@
 package main.alphabet;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class EnglishAlphabet extends Alphabet{
-    private final HashMap<Character, Character> alphabetCapitalLetters = new HashMap<>();
-    private final HashMap<Character, Character> alphabetSmallLetters = new HashMap<>();
-    public HashMap<Character, Character> getAlphabetCapitalLetters(){
+    private char[] uppercaseEnglishAlphabetArray = {
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    };
+    private char[] lowercaseEnglishAlphabetArray = {
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
+    };
+    private final LinkedHashMap<Character, Character> alphabetCapitalLetters = new LinkedHashMap<>();
+    private final LinkedHashMap<Character, Character> alphabetSmallLetters = new LinkedHashMap<>();
+    public LinkedHashMap<Character, Character> getAlphabetCapitalLetters(){
         return alphabetCapitalLetters;
     }
-    public HashMap<Character, Character> getAlphabetSmallLetters(){
+    public LinkedHashMap<Character, Character> getAlphabetSmallLetters(){
         return alphabetSmallLetters;
     }
     public void initializeAlphabet(int key){
@@ -17,28 +26,29 @@ public class EnglishAlphabet extends Alphabet{
     }
 
     private void initializeAlphabetCapitalLetters(int key){
-        int modifyChar = 0;
-        int firstByteAlphabet = 65;
-        int lastByteAlphabet = 90;
-        int consistLetters = 26;
-        for (int i = 1; i <= consistLetters; i++) {
-            modifyChar = firstByteAlphabet + key;
-            alphabetCapitalLetters.put((char)firstByteAlphabet,
-                    (char)(modifyChar > lastByteAlphabet ? modifyChar % lastByteAlphabet + 64 : modifyChar));
-            firstByteAlphabet++;
+        char[] alphabet = uppercaseEnglishAlphabetArray;
+        int modifyIndex = 0;
+        for (int i = 0; i < 26; i++) {
+            modifyIndex = i + key;
+            alphabetCapitalLetters.put(alphabet[i], modifyIndex >= 26 ? alphabet[modifyIndex % 26] : alphabet[modifyIndex]);
+        }
+        System.out.println("??????? ??????????? ???? ? ????????? ????? HashMap:");
+        for (char k : alphabetCapitalLetters.keySet()) {
+            char value = alphabetCapitalLetters.get(k);
+            System.out.println(k + ": " + value);
         }
     }
     private void initializeAlphabetSmallLetters(int key){
-        int modifyChar = 0;
-        int firstByteAlphabet = 97;
-        int lastByteAlphabet = 122;
-        int consistLetters = 26;
-
-        for (int i = 1; i <= consistLetters; i++, firstByteAlphabet++) {
-            modifyChar = (char)firstByteAlphabet + key;
-            alphabetSmallLetters.put((char)firstByteAlphabet,
-                    (char)(modifyChar > lastByteAlphabet ? modifyChar % lastByteAlphabet + 96 : modifyChar));
+        char[] alphabet = lowercaseEnglishAlphabetArray;
+        int modifyIndex = 0;
+        for (int i = 0; i < 26; i++) {
+            modifyIndex = i + key;
+            alphabetSmallLetters.put(alphabet[i], modifyIndex >= 26 ? alphabet[modifyIndex % 26] : alphabet[modifyIndex]);
         }
-
+        System.out.println("??????? ??????????? ???? ? ????????? ????? HashMap:");
+        for (char k : alphabetSmallLetters.keySet()) {
+            char value = alphabetSmallLetters.get(k);
+            System.out.println(k + ": " + value);
+        }
     }
 }
