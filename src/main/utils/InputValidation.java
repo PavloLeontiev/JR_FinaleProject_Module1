@@ -23,7 +23,6 @@ public class InputValidation {
                 default:
                     throw new ArrayIndexOutOfBoundsException();
             }
-            // userData.setAlphabet(new UkrainianAlphabet()); // by default
         }
     }
 
