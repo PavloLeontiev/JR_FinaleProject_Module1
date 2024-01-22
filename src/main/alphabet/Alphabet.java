@@ -24,5 +24,6 @@ public abstract class Alphabet {
     public static ArrayList<Alphabet> getAlphabets() {
         return alphabets;
     }
+
 }
 

@@ -100,5 +100,4 @@ public class UserData {
     public void setKey(String key) {
         this.key = key;
     }
-
 }

@@ -54,36 +54,4 @@ public class FileHandler {
             throw new RuntimeException(e);
         }
     }
-
-    //    private static void checkFileContent2(UserData userData) {
-//        try(RandomAccessFile aFile = new RandomAccessFile(userData.getFilePathRead(), "rw");
-//        FileChannel inChannel = aFile.getChannel()) {
-//            ByteBuffer buf = ByteBuffer.allocate(128);
-//            int bytesRead = inChannel.read(buf);
-//            int cyrillicAlphabet = 0;
-//            int latinAlphabet = 0;
-//            int currentByte = 0;
-//            while (bytesRead != -1) {
-//                buf.flip();
-//                while (buf.hasRemaining()) {
-//                    currentByte = buf.get();
-//                    if (currentByte >= 65 && currentByte <= 122) {
-//                        latinAlphabet++;
-//                    } else if (currentByte < 0) {
-//                        cyrillicAlphabet++;
-//                    } else {
-//                        System.out.println("Another");
-//                    }
-//                }
-//                buf.clear(); //make buffer ready for writing
-//                bytesRead = inChannel.read(buf);
-//                System.out.println(latinAlphabet);
-//                System.out.println(cyrillicAlphabet);
-//            }
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

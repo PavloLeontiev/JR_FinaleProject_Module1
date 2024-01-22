@@ -43,4 +43,5 @@ public class CaesarCipher extends CipherAlgorithm {
         int key = alphabet.getNumberOfLetters() - (Integer.parseInt(stringKey) % alphabet.getNumberOfLetters());
         return encrypt(bytes, alphabet, String.valueOf(key), bytesRead);
     }
+
 }

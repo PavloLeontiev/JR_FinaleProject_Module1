@@ -14,4 +14,5 @@ public enum CipherMode {
         };
         return chooseMode;
     }
+
 }

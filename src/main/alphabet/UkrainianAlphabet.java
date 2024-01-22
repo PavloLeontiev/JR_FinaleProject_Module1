@@ -66,4 +66,5 @@ public class UkrainianAlphabet extends Alphabet {
     public int getNumberOfLetters() {
         return numberOfLetters;
     }
+
 }

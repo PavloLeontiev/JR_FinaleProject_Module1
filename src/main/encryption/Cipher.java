@@ -22,5 +22,6 @@ public class Cipher extends UserData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }

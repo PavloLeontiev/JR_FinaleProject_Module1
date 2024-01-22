@@ -20,10 +20,10 @@ public class Main {
         ////// PART 1 InputValidation ///////
         System.out.println("Please, type some arguments: ENCRYPT/DECRYPT/BRUTE_FORCE, file name and key.");
         String[] arg = new String[3];
-        arg[0] = "ENCRYPT";
-        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile.txt";
-//        arg[0] = "DECRYPT";
-//        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile[ENCRYPTED].txt";
+//        arg[0] = "ENCRYPT";
+//        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile.txt";
+        arg[0] = "DECRYPT";
+        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile[ENCRYPTED].txt";
         arg[2] = "15";
 
         Cipher user1 = new Cipher();
@@ -36,7 +36,6 @@ public class Main {
         AlphabetValidation.alphabetInitialize(user1);
         ////// PART 3 Cipher ///////
         user1.execute();
-
 
     }
 }

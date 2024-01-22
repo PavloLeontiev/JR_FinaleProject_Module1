@@ -64,4 +64,5 @@ public class EnglishAlphabet extends Alphabet {
     public int getNumberOfLetters() {
         return numberOfLetters;
     }
+
 }

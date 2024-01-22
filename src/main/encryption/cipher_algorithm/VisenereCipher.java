@@ -12,4 +12,5 @@ public class VisenereCipher extends CipherAlgorithm {
     public char[] decrypt(char[] bytes, Alphabet alphabet, String stringKey, int bytesRead) {
         return new char[0];
     }
+
 }
