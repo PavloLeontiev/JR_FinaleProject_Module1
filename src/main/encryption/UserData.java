@@ -8,8 +8,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 
 public class UserData {
     protected String filePathRead;

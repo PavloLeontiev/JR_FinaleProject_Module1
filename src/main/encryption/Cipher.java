@@ -1,16 +1,14 @@
 package main.encryption;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 
 public class Cipher extends UserData {
-    public void execute(){
+    public void execute() {
         try {
             char[] array = new char[128];
             int bytesRead = reader.read(array);
             while (bytesRead != -1) {
-                array = switch (cipherMode){
+                array = switch (cipherMode) {
                     case ENCRYPT -> cipherAlgorithm.encrypt(array, alphabet, key, bytesRead);
                     case DECRYPT -> cipherAlgorithm.decrypt(array, alphabet, key, bytesRead);
                     case BRUTE_FORCE -> throw null;

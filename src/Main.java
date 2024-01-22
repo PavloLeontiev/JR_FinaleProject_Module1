@@ -19,11 +19,11 @@ public class Main {
 
         ////// PART 1 InputValidation ///////
         String[] arg = new String[3];
-//        arg[0] = "ENCRYPT";
-//        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile.txt";
-        arg[0] = "DECRYPT";
-        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile[ENCRYPTED].txt";
-        arg[2] = "15";
+        arg[0] = "ENCRYPT";
+        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile.txt";
+//        arg[0] = "DECRYPT";
+//        arg[1] = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile[ENCRYPTED].txt";
+        arg[2] = "100";
         System.out.println("Please, type some arguments: ENCRYPT/DECRYPT/BRUTE_FORCE, file name and key.");
         Cipher user1 = new Cipher();
         InputValidation.validation(user1, arg);
@@ -35,30 +35,6 @@ public class Main {
         AlphabetValidation.alphabetInitialize(user1);
         ////// PART 3 Cipher ///////
         user1.execute();
-
-
-
-
-//        String filePathReader = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\newFile.txt";
-//        FileReader fileReader = new FileReader(filePathReader);
-//        BufferedReader reader = new BufferedReader(fileReader);
-//
-//        String filePathWriter = "C:\\Users\\sodr5\\IdeaProjects\\JR_FinaleProject_Module1\\src\\file.txt";
-//        FileWriter fileWriter = new FileWriter(filePathWriter);
-//        BufferedWriter writer = new BufferedWriter(fileWriter);
-//
-//        char[] array = new char[5];
-//        int bytesRead = reader.read(array);
-//        while(bytesRead != -1){
-//            for(int i = 0; i < bytesRead; i++){
-//                System.out.print(array[i]);
-//            }
-//            writer.write(array, 0, bytesRead);
-//            writer.flush();
-//            bytesRead = reader.read(array);
-//        }
-//        fileReader.close();
-//        fileWriter.close();
 
     }
 }
