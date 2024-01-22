@@ -4,10 +4,11 @@ import main.alphabet.Alphabet;
 
 import java.util.HashMap;
 
-public class CaesarCipher extends CipherAlgorithm{
+public class CaesarCipher extends CipherAlgorithm {
     private HashMap<Character, Character> alphabetCapitalLetters;
     private HashMap<Character, Character> alphabetSmallLetters;
-    private void initializeAlphabet(Alphabet alphabet, String sKey){
+
+    private void initializeAlphabet(Alphabet alphabet, String sKey) {
         alphabet.initializeAlphabet(Integer.parseInt(sKey));
         alphabetCapitalLetters = alphabet.getAlphabetCapitalLetters();
         alphabetSmallLetters = alphabet.getAlphabetSmallLetters();
@@ -20,13 +21,13 @@ public class CaesarCipher extends CipherAlgorithm{
 
         initializeAlphabet(alphabet, sKey);
 
-        for(int i = 0; i < bytesRead; i++){
+        for (int i = 0; i < bytesRead; i++) {
             currentByte = bytes[i];
-            if(alphabet.isLetter(currentByte)){
-                if(alphabet.isUpperCase(currentByte)){
+            if (alphabet.isLetter(currentByte)) {
+                if (alphabet.isUpperCase(currentByte)) {
                     char currentChar = alphabetCapitalLetters.get(currentByte);
                     encryptedBytes[i] = currentChar;
-                } else if(alphabet.isLowerCase(currentByte)){
+                } else if (alphabet.isLowerCase(currentByte)) {
                     char currentChar = alphabetSmallLetters.get(currentByte);
                     encryptedBytes[i] = currentChar;
                 }

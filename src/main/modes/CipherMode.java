@@ -5,7 +5,7 @@ public enum CipherMode {
     DECRYPT,
     BRUTE_FORCE;
 
-    public static CipherMode initializeMode(String mode){
+    public static CipherMode initializeMode(String mode) {
         CipherMode chooseMode = switch (mode) {
             case "ENCRYPT" -> CipherMode.ENCRYPT;
             case "DECRYPT" -> CipherMode.DECRYPT;

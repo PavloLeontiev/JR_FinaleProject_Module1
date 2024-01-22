@@ -3,7 +3,7 @@ package main.alphabet;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class UkrainianAlphabet extends Alphabet{
+public class UkrainianAlphabet extends Alphabet {
     private final int numberOfLetters = 33;
     private char[] uppercaseUkrainianAlphabetArray = {
             'А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й',
@@ -18,18 +18,21 @@ public class UkrainianAlphabet extends Alphabet{
     };
     private final LinkedHashMap<Character, Character> alphabetCapitalLetters = new LinkedHashMap<>();
     private final LinkedHashMap<Character, Character> alphabetSmallLetters = new LinkedHashMap<>();
-    public HashMap<Character, Character> getAlphabetCapitalLetters(){
+
+    public HashMap<Character, Character> getAlphabetCapitalLetters() {
         return alphabetCapitalLetters;
     }
-    public HashMap<Character, Character> getAlphabetSmallLetters(){
+
+    public HashMap<Character, Character> getAlphabetSmallLetters() {
         return alphabetSmallLetters;
     }
-    public void initializeAlphabet(int key){
+
+    public void initializeAlphabet(int key) {
         initializeAlphabetCapitalLetters(key);
         initializeAlphabetSmallLetters(key);
     }
 
-    private void initializeAlphabetCapitalLetters(int key){
+    private void initializeAlphabetCapitalLetters(int key) {
         char[] alphabet = uppercaseUkrainianAlphabetArray;
         int modifyIndex = 0;
         for (int i = 0; i < 33; i++) {
@@ -37,27 +40,13 @@ public class UkrainianAlphabet extends Alphabet{
             alphabetCapitalLetters.put(alphabet[i], modifyIndex >= 33 ? alphabet[modifyIndex % 33] : alphabet[modifyIndex]);
         }
     }
-    private void initializeAlphabetSmallLetters(int key){
+
+    private void initializeAlphabetSmallLetters(int key) {
         char[] alphabet = lowercaseUkrainianAlphabetArray;
         int modifyIndex = 0;
         for (int i = 0; i < 33; i++) {
             modifyIndex = i + key;
             alphabetSmallLetters.put(alphabet[i], modifyIndex >= 33 ? alphabet[modifyIndex % 33] : alphabet[modifyIndex]);
         }
-    }
-    public boolean isLetter (char ch){
-        if(alphabetCapitalLetters.containsKey(ch)) return true;
-        else if (alphabetSmallLetters.containsKey(ch)) return true;
-        else return false;
-    }
-    public boolean isUpperCase (char ch){
-        return alphabetCapitalLetters.containsKey(ch);
-    }
-    public boolean isLowerCase (char ch){
-        return alphabetSmallLetters.containsKey(ch);
-    }
-
-    public int getNumberOfLetters() {
-        return numberOfLetters;
     }
 }
