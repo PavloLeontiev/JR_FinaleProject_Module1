@@ -7,16 +7,20 @@ import main.encryption.cipher_algorithm.VisenereCipher;
 import main.modes.CipherMode;
 
 public class InputValidation {
+    private final static int COMMAND_ARGUMENT = 0;
+    private final static int FILE_PATH_ARGUMENT = 1;
+    private final static int KEY_ARGUMENT = 2;
+
     public static void validation(UserData userData, String[] args) {
         for (int i = 0; i < args.length; i++) {
             switch (i) {
-                case 0:
+                case COMMAND_ARGUMENT:
                     userData.setCipherMode(CipherMode.initializeMode(args[i]));
                     break;
-                case 1:
-                    userData.setFilePathRead(args[i]);
+                case FILE_PATH_ARGUMENT:
+                    userData.setFilePathRead(FileHandler.checkFileExisting(args[i]));
                     break;
-                case 2:
+                case KEY_ARGUMENT:
                     userData.setCipherAlgorithm(validationAlgorithm(args[i]));
                     userData.setKey(args[i]);
                     break;

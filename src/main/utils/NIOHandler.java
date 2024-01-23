@@ -1,6 +1,8 @@
 package main.utils;
 
 import main.encryption.UserData;
+import main.exception.*;
+import main.exception.FileNotFoundException;
 
 import java.io.*;
 
@@ -24,8 +26,8 @@ public class NIOHandler {
     private static FileReader getFileReader(String filePath) {
         try {
             return new FileReader(filePath);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new FileNotFoundException(filePath);
         }
     }
 
@@ -33,7 +35,7 @@ public class NIOHandler {
         try {
             return new FileWriter(filePath);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException(filePath);
         }
     }
 

@@ -12,15 +12,15 @@ import java.io.IOException;
 public class FileHandler {
 
     public static void fileValidation(UserData userData) {
-        checkFileExisting(userData.getFilePathRead());
         userData.setFilePathWrite(initializeFileNameWrite(userData.getCipherMode(), userData.getFilePathRead()));
         createFile(userData.getFilePathWrite());
     }
 
-    private static void checkFileExisting(String filePath) {
+    public static String checkFileExisting(String filePath) {
         File file = new File(filePath);
         if (!file.exists())
             throw new FileNotFoundException(filePath);
+        return filePath;
     }
 
     private static String initializeFileNameWrite(CipherMode cipherMode, String fileRead) {
@@ -48,10 +48,9 @@ public class FileHandler {
     private static void createFile(String filePath) {
         File file = new File(filePath);
         try {
-            if (!file.createNewFile())
-                throw new FileAlreadyExistsException(filePath);
+            if (!file.createNewFile()) throw new FileAlreadyExistsException(filePath);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileAlreadyExistsException(filePath);
         }
     }
 }
