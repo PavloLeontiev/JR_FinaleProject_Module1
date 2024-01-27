@@ -25,5 +25,6 @@ public abstract class Alphabet {
         return ALPHABETS;
     }
 
+    public abstract ArrayList<String> getFREQUENTLY_USED_WORDS();
 }
 

@@ -1,5 +1,6 @@
 package main.alphabet;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class UkrainianAlphabet extends Alphabet {
@@ -65,6 +66,11 @@ public class UkrainianAlphabet extends Alphabet {
 
     public int getLETTERS_IN_ALPHABET() {
         return LETTERS_IN_ALPHABET;
+    }
+
+    @Override
+    public ArrayList<String> getFREQUENTLY_USED_WORDS() {
+        return null;
     }
 
 }

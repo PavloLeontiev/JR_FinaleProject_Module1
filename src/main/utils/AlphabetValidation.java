@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class AlphabetValidation {
     ArrayList<Alphabet> alphabets = Alphabet.getAlphabets();
-    private static final int capacity = 128;
+    private static final int capacity = 1024;
     private static final int ENGLISH_ALPHABET = 0;
     private static final int UKRAINIAN_ALPHABET = 1;
 
@@ -34,14 +34,14 @@ public class AlphabetValidation {
             for (char ch : array) {
                 if (alphabets.get(ENGLISH_ALPHABET).isLetter(ch)) {
                     numberOfEnglishLetters++;
-                } else if (alphabets.get(UKRAINIAN_ALPHABET).isLetter(ch)) { // UkrainianAlphabet
+                } else if (alphabets.get(UKRAINIAN_ALPHABET).isLetter(ch)) {
                     numberOfUkrainianLetters++;
                 }
             }
             if (numberOfEnglishLetters > numberOfUkrainianLetters) {
-                return alphabets.get(ENGLISH_ALPHABET); // EnglishAlphabet
+                return alphabets.get(ENGLISH_ALPHABET);
             } else {
-                return alphabets.get(UKRAINIAN_ALPHABET); // UkrainianAlphabet
+                return alphabets.get(UKRAINIAN_ALPHABET);
             }
 
         } catch (IOException e) {

@@ -26,8 +26,7 @@ public class FileHandler {
     private static String initializeFileNameWrite(CipherMode cipherMode, String fileRead) {
         String mode = switch (cipherMode) {
             case ENCRYPT -> fileNameEncrypt(fileRead);
-            case DECRYPT -> fileNameDecrypt(fileRead);
-            case BRUTE_FORCE -> null;
+            case DECRYPT, BRUTE_FORCE -> fileNameDecrypt(fileRead);
         };
         return mode;
     }

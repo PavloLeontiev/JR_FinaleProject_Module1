@@ -1,35 +1,27 @@
 package main.encryption.cipher_algorithm;
 
 import main.alphabet.Alphabet;
+import main.modes.CipherMode;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class CaesarCipher extends CipherAlgorithm {
-    private LinkedHashMap<Character, Character> UPPERCASE_ALPHABET_LETTERS;
-    private LinkedHashMap<Character, Character> LOWERCASE_ALPHABET_LETTERS;
-
-    private void initializeAlphabet(Alphabet alphabet, String sKey) {
-        alphabet.initializeAlphabet(Integer.parseInt(sKey));
-        UPPERCASE_ALPHABET_LETTERS = alphabet.getUPPERCASE_ALPHABET_LETTERS();
-        LOWERCASE_ALPHABET_LETTERS = alphabet.getLOWERCASE_ALPHABET_LETTERS();
-    }
+    private Alphabet alphabet;
 
     @Override
-    public char[] encrypt(char[] chars, Alphabet alphabet, String key, int bytesRead) {
+    public char[] encrypt(char[] chars, int bytesRead) {
         char currentChar = 0;
         char[] encryptedChars = new char[chars.length];
-
-        initializeAlphabet(alphabet, key);
-
         for (int i = 0; i < bytesRead; i++) {
             currentChar = chars[i];
             if (alphabet.isLetter(currentChar)) {
                 char currentLetter;
                 if (alphabet.isUpperCase(currentChar)) {
-                    currentLetter = UPPERCASE_ALPHABET_LETTERS.get(currentChar);
+                    currentLetter = alphabet.getUPPERCASE_ALPHABET_LETTERS().get(currentChar);
                     encryptedChars[i] = currentLetter;
                 } else if (alphabet.isLowerCase(currentChar)) {
-                    currentLetter = LOWERCASE_ALPHABET_LETTERS.get(currentChar);
+                    currentLetter = alphabet.getLOWERCASE_ALPHABET_LETTERS().get(currentChar);
                     encryptedChars[i] = currentLetter;
                 }
             } else {
@@ -40,9 +32,54 @@ public class CaesarCipher extends CipherAlgorithm {
     }
 
     @Override
-    public char[] decrypt(char[] chars, Alphabet alphabet, String stringKey, int bytesRead) {
-        int key = alphabet.getLETTERS_IN_ALPHABET() - (Integer.parseInt(stringKey) % alphabet.getLETTERS_IN_ALPHABET());
-        return encrypt(chars, alphabet, String.valueOf(key), bytesRead);
+    public char[] decrypt(char[] chars, int bytesRead) {
+        return encrypt(chars, bytesRead);
     }
 
+    @Override
+    public char[] brute_force(char[] chars, int bytesRead) {
+        return encrypt(chars, bytesRead);
+    }
+
+    public int getEncryptKey(String key) {
+        return Integer.parseInt(key);
+    }
+
+    public int getDecryptKey(String key) {
+        int decryptKey = alphabet.getLETTERS_IN_ALPHABET() - (Integer.parseInt(key) % alphabet.getLETTERS_IN_ALPHABET());
+        return decryptKey;
+    }
+
+    public int getBruteForceKey(char[] chars, int bytesRead) {
+        HashMap<Integer, Integer> keySearch = new HashMap();
+
+        for (int key = 1; key < alphabet.getLETTERS_IN_ALPHABET(); key++) {
+            int numberOfCoincidences = 0;
+            alphabet.initializeAlphabet(key);
+            char[] decryptedChars = decrypt(chars, bytesRead);
+            String[] wordsOfText = String.valueOf(decryptedChars).split(" ");
+            for (int j = 0; j < wordsOfText.length; j++) {
+                if (alphabet.getFREQUENTLY_USED_WORDS().contains(wordsOfText[j].toLowerCase())) {
+                    numberOfCoincidences++;
+                }
+            }
+            System.out.println("Key: " + key + " coincidences: " + numberOfCoincidences);
+            keySearch.put(key, numberOfCoincidences);
+        }
+
+        int suitableKey = 0;
+        int maxCoincidences = 0;
+        for (int key : keySearch.keySet()) {
+            int coincidences = keySearch.get(key);
+            if (coincidences > maxCoincidences) {
+                maxCoincidences = coincidences;
+                suitableKey = key;
+            }
+        }
+        return suitableKey;
+    }
+
+    public void setAlphabet(Alphabet alphabet) {
+        this.alphabet = alphabet;
+    }
 }
