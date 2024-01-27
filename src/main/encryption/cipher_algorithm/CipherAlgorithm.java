@@ -9,11 +9,11 @@ public abstract class CipherAlgorithm {
 
     public abstract char[] brute_force(char[] chars, int bytesRead);
 
-    public abstract void setAlphabet(Alphabet alphabet);
-
     public abstract int getEncryptKey(String key);
 
     public abstract int getDecryptKey(String key);
 
     public abstract int getBruteForceKey(char[] chars, int bytesRead);
+
+    public abstract void setAlphabet(Alphabet alphabet);
 }

@@ -1,7 +1,6 @@
 package main.utils;
 
-
-import main.encryption.UserData;
+import main.encryption.CipherData;
 import main.exception.FileAlreadyExistsException;
 import main.exception.FileNotFoundException;
 import main.modes.CipherMode;
@@ -11,9 +10,9 @@ import java.io.IOException;
 
 public class FileHandler {
 
-    public static void fileValidation(UserData userData) {
-        userData.setFilePathWrite(initializeFileNameWrite(userData.getCipherMode(), userData.getFilePathRead()));
-        createFile(userData.getFilePathWrite());
+    public static void fileValidation(CipherData cipherData) {
+        cipherData.setFilePathWrite(initializeFileNameWrite(cipherData.getCipherMode(), cipherData.getFilePathRead()));
+        createFile(cipherData.getFilePathWrite());
     }
 
     public static String checkFileExisting(String filePath) {

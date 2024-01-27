@@ -41,29 +41,32 @@ public class CaesarCipher extends CipherAlgorithm {
         return encrypt(chars, bytesRead);
     }
 
+    @Override
     public int getEncryptKey(String key) {
-        return Integer.parseInt(key);
+        int encryptKey = Integer.parseInt(key) % alphabet.getLETTERS_IN_ALPHABET();
+        return encryptKey;
     }
 
+    @Override
     public int getDecryptKey(String key) {
         int decryptKey = alphabet.getLETTERS_IN_ALPHABET() - (Integer.parseInt(key) % alphabet.getLETTERS_IN_ALPHABET());
         return decryptKey;
     }
 
+    @Override
     public int getBruteForceKey(char[] chars, int bytesRead) {
         HashMap<Integer, Integer> keySearch = new HashMap();
 
         for (int key = 1; key < alphabet.getLETTERS_IN_ALPHABET(); key++) {
             int numberOfCoincidences = 0;
             alphabet.initializeAlphabet(key);
-            char[] decryptedChars = decrypt(chars, bytesRead);
+            char[] decryptedChars = encrypt(chars, bytesRead);
             String[] wordsOfText = String.valueOf(decryptedChars).split(" ");
             for (int j = 0; j < wordsOfText.length; j++) {
                 if (alphabet.getFREQUENTLY_USED_WORDS().contains(wordsOfText[j].toLowerCase())) {
                     numberOfCoincidences++;
                 }
             }
-            System.out.println("Key: " + key + " coincidences: " + numberOfCoincidences);
             keySearch.put(key, numberOfCoincidences);
         }
 
@@ -79,6 +82,7 @@ public class CaesarCipher extends CipherAlgorithm {
         return suitableKey;
     }
 
+    @Override
     public void setAlphabet(Alphabet alphabet) {
         this.alphabet = alphabet;
     }

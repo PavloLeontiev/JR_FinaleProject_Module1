@@ -4,15 +4,13 @@ import main.alphabet.Alphabet;
 
 import java.io.IOException;
 
-import static main.modes.CipherMode.BRUTE_FORCE;
-
-public class Cipher extends UserData {
+public class Cipher extends CipherData {
 
     public void execute() {
         try {
-            char[] array = new char[1024];
+            char[] array = new char[bufferCapacity];
             int bytesRead = reader.read(array);
-            initializeAlphabet(alphabet, key, array, bytesRead);
+            initializeEncryptAlphabet(alphabet, key, array, bytesRead);
             while (bytesRead != -1) {
                 array = cipherAlgorithm.encrypt(array, bytesRead);
                 writer.write(array, 0, bytesRead);
@@ -27,11 +25,10 @@ public class Cipher extends UserData {
 
     }
 
-    private void initializeAlphabet(Alphabet alphabet, String key, char[] array, int bytesRead) {
+    private void initializeEncryptAlphabet(Alphabet alphabet, String key, char[] array, int bytesRead) {
         cipherAlgorithm.setAlphabet(alphabet);
         int modifyKey = initializeKey(key, array, bytesRead);
         alphabet.initializeAlphabet(modifyKey);
-        System.out.println(modifyKey);
     }
 
     private int initializeKey(String key, char[] chars, int bytesRead) {

@@ -1,9 +1,13 @@
 package main.alphabet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class UkrainianAlphabet extends Alphabet {
+    public UkrainianAlphabet() {
+        initializeAlphabet(0);
+    }
     private final int LETTERS_IN_ALPHABET = 33;
     private final char[] UPPERCASE_ENGLISH_ALPHABET_ARRAY = {
             'А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й',
@@ -16,6 +20,21 @@ public class UkrainianAlphabet extends Alphabet {
             'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч',
             'ш', 'щ', 'ь', 'ю', 'я'
     };
+    private final ArrayList<String> FREQUENTLY_USED_WORDS = new ArrayList<>(Arrays.asList(
+            "не", "на", "що", "вони", "ви", "ми", "він",
+            "так", "але", "все", "від", "коли", "як", "вже", "до",
+            "від", "щоб", "за", "то", "якщо", "його", "також",
+            "тут", "або", "по", "ні", "зі", "був", "це", "там",
+            "дуже", "тільки", "мені", "вона", "привіт", "ти", "це",
+            "де", "чому", "так", "може", "завжди", "ніколи",
+            "добре", "погано", "багато", "мало", "великий", "малий",
+            "дуже", "тільки", "спасибі", "будь ласка", "просто",
+            "зрозуміти", "робити", "хочу", "потрібно", "можливо",
+            "сьогодні", "завтра", "вчора", "ранок", "день", "вечір",
+            "ніч", "робота", "навчання", "життя", "любити", "ненавидіти",
+            "сім'я", "друзі", "гроші", "час", "інтересно", "красиво",
+            "щасливий", "сумний", "здоров'я"
+    ));
     private final LinkedHashMap<Character, Character> UPPERCASE_ALPHABET_LETTERS = new LinkedHashMap<>();
     private final LinkedHashMap<Character, Character> LOWERCASE_ALPHABET_LETTERS = new LinkedHashMap<>();
 
@@ -68,9 +87,8 @@ public class UkrainianAlphabet extends Alphabet {
         return LETTERS_IN_ALPHABET;
     }
 
-    @Override
     public ArrayList<String> getFREQUENTLY_USED_WORDS() {
-        return null;
+        return FREQUENTLY_USED_WORDS;
     }
 
 }

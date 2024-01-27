@@ -1,9 +1,9 @@
 package main.utils;
 
-import main.encryption.UserData;
+import main.encryption.CipherData;
 import main.encryption.cipher_algorithm.CaesarCipher;
 import main.encryption.cipher_algorithm.CipherAlgorithm;
-import main.encryption.cipher_algorithm.VisenereCipher;
+import main.encryption.cipher_algorithm.VigenereCipher;
 import main.modes.CipherMode;
 
 public class InputValidation {
@@ -11,18 +11,18 @@ public class InputValidation {
     private final static int FILE_PATH_ARGUMENT = 1;
     private final static int KEY_ARGUMENT = 2;
 
-    public static void validation(UserData userData, String[] args) {
+    public static void validation(CipherData cipherData, String[] args) {
         for (int i = 0; i < args.length; i++) {
             switch (i) {
                 case COMMAND_ARGUMENT:
-                    userData.setCipherMode(CipherMode.initializeMode(args[i]));
+                    cipherData.setCipherMode(CipherMode.initializeMode(args[i]));
                     break;
                 case FILE_PATH_ARGUMENT:
-                    userData.setFilePathRead(FileHandler.checkFileExisting(args[i]));
+                    cipherData.setFilePathRead(FileHandler.checkFileExisting(args[i]));
                     break;
                 case KEY_ARGUMENT:
-                    userData.setCipherAlgorithm(validationAlgorithm(args[i], userData.getCipherMode()));
-                    userData.setKey(args[i]);
+                    cipherData.setCipherAlgorithm(validationAlgorithm(args[i], cipherData.getCipherMode()));
+                    cipherData.setKey(args[i]);
                     break;
                 default:
                     throw new ArrayIndexOutOfBoundsException();
@@ -36,19 +36,17 @@ public class InputValidation {
             if (key.matches("^[0-9]*$")) {
                 return new CaesarCipher();
             } else if (key.matches("^[a-zA-Z]*$")) {
-                return new VisenereCipher();
+                return new VigenereCipher();
             } else {
                 throw new IllegalArgumentException();
             }
         } else if (mode == CipherMode.BRUTE_FORCE) {
-            if (key.equalsIgnoreCase("CaesarCipher")) {
+            if (key.equalsIgnoreCase("Caesar")) {
                 return new CaesarCipher();
-            } else if (key.equalsIgnoreCase("VisenereCipher")) {
-                return new VisenereCipher();
-            } else if (key == null) {
-                return new CaesarCipher(); // by default
+            } else if (key.equalsIgnoreCase("Vigenere")) {
+                return new VigenereCipher();
             } else {
-                throw new IllegalArgumentException();
+                return new CaesarCipher(); // by default
             }
         }
         return null;
