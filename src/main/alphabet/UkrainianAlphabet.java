@@ -1,29 +1,59 @@
 package main.alphabet;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 public class UkrainianAlphabet extends Alphabet {
-    private final int numberOfLetters = 33;
-    private char[] uppercaseUkrainianAlphabetArray = {
+    public UkrainianAlphabet() {
+        initializeAlphabet(0);
+    }
+    private final int LETTERS_IN_ALPHABET = 33;
+    private final ArrayList<Character> UPPERCASE_ENGLISH_ALPHABET_ARRAY = new ArrayList<>(Arrays.asList(
             'А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й',
             'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч',
             'Ш', 'Щ', 'Ь', 'Ю', 'Я'
-    };
+    ));
 
-    private char[] lowercaseUkrainianAlphabetArray = {
+    private final ArrayList<Character> LOWERCASE_ENGLISH_ALPHABET_ARRAY = new ArrayList<>(Arrays.asList(
             'а', 'б', 'в', 'г', 'ґ', 'д', 'е', 'є', 'ж', 'з', 'и', 'і', 'ї', 'й',
             'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч',
             'ш', 'щ', 'ь', 'ю', 'я'
-    };
-    private final LinkedHashMap<Character, Character> alphabetCapitalLetters = new LinkedHashMap<>();
-    private final LinkedHashMap<Character, Character> alphabetSmallLetters = new LinkedHashMap<>();
+    ));
+    private final ArrayList<String> FREQUENTLY_USED_WORDS = new ArrayList<>(Arrays.asList(
+            "не", "на", "що", "вони", "ви", "ми", "він",
+            "так", "але", "все", "від", "коли", "як", "вже", "до",
+            "від", "щоб", "за", "то", "якщо", "його", "також",
+            "тут", "або", "по", "ні", "зі", "був", "це", "там",
+            "дуже", "тільки", "мені", "вона", "привіт", "ти", "це",
+            "де", "чому", "так", "може", "завжди", "ніколи",
+            "добре", "погано", "багато", "мало", "великий", "малий",
+            "дуже", "тільки", "спасибі", "будь ласка", "просто",
+            "зрозуміти", "робити", "хочу", "потрібно", "можливо",
+            "сьогодні", "завтра", "вчора", "ранок", "день", "вечір",
+            "ніч", "робота", "навчання", "життя", "любити", "ненавидіти",
+            "сім'я", "друзі", "гроші", "час", "інтересно", "красиво",
+            "щасливий", "сумний", "здоров'я"
+    ));
 
-    public LinkedHashMap<Character, Character> getAlphabetCapitalLetters() {
-        return alphabetCapitalLetters;
+    public ArrayList<Character> getUPPERCASE_ENGLISH_ALPHABET_ARRAY() {
+        return UPPERCASE_ENGLISH_ALPHABET_ARRAY;
     }
 
-    public LinkedHashMap<Character, Character> getAlphabetSmallLetters() {
-        return alphabetSmallLetters;
+    public ArrayList<Character> getLOWERCASE_ENGLISH_ALPHABET_ARRAY() {
+        return LOWERCASE_ENGLISH_ALPHABET_ARRAY;
+    }
+
+    private final LinkedHashMap<Character, Character> UPPERCASE_ALPHABET_LETTERS = new LinkedHashMap<>();
+
+    private final LinkedHashMap<Character, Character> LOWERCASE_ALPHABET_LETTERS = new LinkedHashMap<>();
+
+    public LinkedHashMap<Character, Character> getUPPERCASE_ALPHABET_LETTERS() {
+        return UPPERCASE_ALPHABET_LETTERS;
+    }
+
+    public LinkedHashMap<Character, Character> getLOWERCASE_ALPHABET_LETTERS() {
+        return LOWERCASE_ALPHABET_LETTERS;
     }
 
     public void initializeAlphabet(int key) {
@@ -32,38 +62,45 @@ public class UkrainianAlphabet extends Alphabet {
     }
 
     private void initializeAlphabetCapitalLetters(int key) {
-        char[] alphabet = uppercaseUkrainianAlphabetArray;
+        ArrayList<Character> alphabet = UPPERCASE_ENGLISH_ALPHABET_ARRAY;
         int modifyIndex = 0;
-        for (int i = 0; i < 33; i++) {
+        for (int i = 0; i < LETTERS_IN_ALPHABET; i++) {
             modifyIndex = i + key;
-            alphabetCapitalLetters.put(alphabet[i], modifyIndex >= 33 ? alphabet[modifyIndex % 33] : alphabet[modifyIndex]);
+            UPPERCASE_ALPHABET_LETTERS.put(alphabet.get(i), modifyIndex >= LETTERS_IN_ALPHABET ?
+                    alphabet.get(modifyIndex % LETTERS_IN_ALPHABET) : alphabet.get(modifyIndex));
         }
     }
 
     private void initializeAlphabetSmallLetters(int key) {
-        char[] alphabet = lowercaseUkrainianAlphabetArray;
+        ArrayList<Character> alphabet = LOWERCASE_ENGLISH_ALPHABET_ARRAY;
         int modifyIndex = 0;
-        for (int i = 0; i < 33; i++) {
+        for (int i = 0; i < LETTERS_IN_ALPHABET; i++) {
             modifyIndex = i + key;
-            alphabetSmallLetters.put(alphabet[i], modifyIndex >= 33 ? alphabet[modifyIndex % 33] : alphabet[modifyIndex]);
+            LOWERCASE_ALPHABET_LETTERS.put(alphabet.get(i), modifyIndex >= LETTERS_IN_ALPHABET ?
+                    alphabet.get(modifyIndex % LETTERS_IN_ALPHABET) : alphabet.get(modifyIndex));
         }
     }
 
     public boolean isLetter(char ch) {
-        if (alphabetCapitalLetters.containsKey(ch)) return true;
-        else if (alphabetSmallLetters.containsKey(ch)) return true;
+        if (UPPERCASE_ALPHABET_LETTERS.containsKey(ch)) return true;
+        else if (LOWERCASE_ALPHABET_LETTERS.containsKey(ch)) return true;
         else return false;
     }
 
     public boolean isUpperCase(char ch) {
-        return alphabetCapitalLetters.containsKey(ch);
+        return UPPERCASE_ALPHABET_LETTERS.containsKey(ch);
     }
 
     public boolean isLowerCase(char ch) {
-        return alphabetSmallLetters.containsKey(ch);
+        return LOWERCASE_ALPHABET_LETTERS.containsKey(ch);
     }
 
-    public int getNumberOfLetters() {
-        return numberOfLetters;
+    public int getLETTERS_IN_ALPHABET() {
+        return LETTERS_IN_ALPHABET;
     }
+
+    public ArrayList<String> getFREQUENTLY_USED_WORDS() {
+        return FREQUENTLY_USED_WORDS;
+    }
+
 }

@@ -1,42 +1,43 @@
 package main.utils;
 
 import main.alphabet.Alphabet;
-import main.encryption.UserData;
+import main.encryption.CipherData;
 
 import java.io.*;
 import java.util.ArrayList;
 
 public class AlphabetValidation {
-    ArrayList<Alphabet> alphabets = Alphabet.getAlphabets();
+    private static final int ENGLISH_ALPHABET = 0;
+    private static final int UKRAINIAN_ALPHABET = 1;
+    private static Alphabet english;
+    private static Alphabet ukrainian;
 
-    public static void alphabetInitialize(UserData userData) {
+    public static void alphabetInitialize(CipherData cipherData) {
         ArrayList<Alphabet> alphabets = Alphabet.getAlphabets();
-        alphabets.get(0).initializeAlphabet(0);
-        alphabets.get(1).initializeAlphabet(0);
-        userData.setAlphabet(
-                validationContent(alphabets, userData.getFileReader(), userData.getReader()
-                )
-        );
+        english = alphabets.get(ENGLISH_ALPHABET);
+        ukrainian = alphabets.get(UKRAINIAN_ALPHABET);
+        cipherData.setAlphabet(validationContent(alphabets, cipherData.getReader(), cipherData.getBufferCapacity()));
     }
 
-    private static Alphabet validationContent(ArrayList<Alphabet> alphabets, FileReader fileReader, BufferedReader reader) {
+    private static Alphabet validationContent(ArrayList<Alphabet> alphabets, BufferedReader reader, int capacity) {
         try {
-            char[] array = new char[128];
+            char[] array = new char[capacity];
             int numberOfEnglishLetters = 0;
             int numberOfUkrainianLetters = 0;
-            reader.mark(128);
+            reader.mark(capacity);
             reader.read(array);
             reader.reset();
             for (char ch : array) {
-                if (alphabets.get(0).isLetter(ch)) // EnglishAlphabet
+                if (english.isLetter(ch)) {
                     numberOfEnglishLetters++;
-                else if (alphabets.get(1).isLetter(ch)) // UkrainianAlphabet
+                } else if (ukrainian.isLetter(ch)) {
                     numberOfUkrainianLetters++;
+                }
             }
             if (numberOfEnglishLetters > numberOfUkrainianLetters) {
-                return alphabets.get(0); // EnglishAlphabet
+                return english;
             } else {
-                return alphabets.get(1); // UkrainianAlphabet
+                return ukrainian;
             }
 
         } catch (IOException e) {
@@ -44,4 +45,5 @@ public class AlphabetValidation {
         }
         return null;
     }
+
 }

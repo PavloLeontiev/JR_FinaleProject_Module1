@@ -1,18 +1,18 @@
 package main.encryption;
 
+import main.alphabet.Alphabet;
+
 import java.io.IOException;
 
-public class Cipher extends UserData {
+public class Cipher extends CipherData {
+
     public void execute() {
         try {
-            char[] array = new char[128];
+            char[] array = new char[bufferCapacity];
             int bytesRead = reader.read(array);
+            cipherAlgorithm.initializeEncryptAlphabet(cipherAlgorithm, cipherMode, alphabet, key, array, bytesRead);
             while (bytesRead != -1) {
-                array = switch (cipherMode) {
-                    case ENCRYPT -> cipherAlgorithm.encrypt(array, alphabet, key, bytesRead);
-                    case DECRYPT -> cipherAlgorithm.decrypt(array, alphabet, key, bytesRead);
-                    case BRUTE_FORCE -> throw null;
-                };
+                array = cipherAlgorithm.encrypt(array, bytesRead);
                 writer.write(array, 0, bytesRead);
                 writer.flush();
                 bytesRead = reader.read(array);
@@ -22,5 +22,6 @@ public class Cipher extends UserData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }

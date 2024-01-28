@@ -9,11 +9,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
-public class UserData {
+public class CipherData {
     protected String filePathRead;
     protected String filePathWrite;
     protected FileReader fileReader;
     protected FileWriter fileWriter;
+    protected int bufferCapacity;
     protected BufferedReader reader;
     protected BufferedWriter writer;
     protected CipherMode cipherMode;
@@ -51,6 +52,14 @@ public class UserData {
 
     public void setFileWriter(FileWriter fileWriter) {
         this.fileWriter = fileWriter;
+    }
+
+    public int getBufferCapacity() {
+        return bufferCapacity;
+    }
+
+    public void setBufferCapacity(int bufferCapacity) {
+        this.bufferCapacity = bufferCapacity;
     }
 
     public BufferedReader getReader() {
@@ -100,5 +109,4 @@ public class UserData {
     public void setKey(String key) {
         this.key = key;
     }
-
 }
