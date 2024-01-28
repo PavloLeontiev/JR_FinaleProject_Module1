@@ -1,13 +1,11 @@
-import main.cli.CLI;
 import main.utils.Menu;
 import main.encryption.Cipher;
 
 public class Main {
     public static void main(String[] args) {
         Cipher cipher = new Cipher();
-        String[] arg = CLI.getInputArgument();
-        Menu.validationCipherData(cipher, arg);
+        Menu.validationCipherData(cipher, args);
         cipher.execute();
-
+        Menu.openModifyFile(cipher);
     }
 }

@@ -30,7 +30,7 @@ public class FileHandler {
         return mode;
     }
 
-    private static String fileNameEncrypt(String fileRead) {
+    public static String fileNameEncrypt(String fileRead) {
         int index = fileRead.lastIndexOf('.');
         String fileWrite = fileRead.substring(0, index) + "[ENCRYPTED]" + fileRead.substring(index);
         return fileWrite;
