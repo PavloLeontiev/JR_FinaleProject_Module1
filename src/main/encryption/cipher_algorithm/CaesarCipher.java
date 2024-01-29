@@ -4,7 +4,6 @@ import main.alphabet.Alphabet;
 import main.modes.CipherMode;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 
 public class CaesarCipher extends CipherAlgorithm {
     private Alphabet alphabet;
@@ -32,16 +31,6 @@ public class CaesarCipher extends CipherAlgorithm {
     }
 
     @Override
-    public char[] decrypt(char[] chars, int bytesRead) {
-        return encrypt(chars, bytesRead);
-    }
-
-    @Override
-    public char[] brute_force(char[] chars, int bytesRead) {
-        return encrypt(chars, bytesRead);
-    }
-
-    @Override
     public int getEncryptKey(String key) {
         int encryptKey = Integer.parseInt(key) % alphabet.getLETTERS_IN_ALPHABET();
         return encryptKey;
@@ -55,7 +44,7 @@ public class CaesarCipher extends CipherAlgorithm {
 
     @Override
     public int getBruteForceKey(char[] chars, int bytesRead) {
-        HashMap<Integer, Integer> keySearch = new HashMap();
+        HashMap<Integer, Integer> keySearch = new HashMap<>();
 
         for (int key = 1; key < alphabet.getLETTERS_IN_ALPHABET(); key++) {
             int numberOfCoincidences = 0;
@@ -85,5 +74,21 @@ public class CaesarCipher extends CipherAlgorithm {
     @Override
     public void setAlphabet(Alphabet alphabet) {
         this.alphabet = alphabet;
+    }
+
+    public void initializeEncryptAlphabet(CipherAlgorithm cipherAlgorithm, CipherMode cipherMode,
+                                          Alphabet alphabet, String key, char[] array, int bytesRead) {
+        cipherAlgorithm.setAlphabet(alphabet);
+        int modifyKey = initializeKey(cipherMode ,key, array, bytesRead);
+        alphabet.initializeAlphabet(modifyKey);
+    }
+
+    private int initializeKey(CipherMode cipherMode ,String key, char[] chars, int bytesRead) {
+        int modifyKey = switch (cipherMode) {
+            case ENCRYPT -> getEncryptKey(key);
+            case DECRYPT -> getDecryptKey(key);
+            case BRUTE_FORCE -> getBruteForceKey(chars, bytesRead);
+        };
+        return modifyKey;
     }
 }

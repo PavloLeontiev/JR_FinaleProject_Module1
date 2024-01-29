@@ -35,7 +35,7 @@ public class InputValidation {
         if (mode == CipherMode.ENCRYPT || mode == CipherMode.DECRYPT) {
             if (key.matches("^[0-9]*$")) {
                 return new CaesarCipher();
-            } else if (key.matches("^[a-zA-Z]*$")) {
+            } else if (key.matches("^[a-zA-Zа-яА-ЯІіЇїЄєҐґ]*$")) {
                 return new VigenereCipher();
             } else {
                 throw new IllegalArgumentException();

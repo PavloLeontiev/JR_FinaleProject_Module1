@@ -10,7 +10,7 @@ public class Cipher extends CipherData {
         try {
             char[] array = new char[bufferCapacity];
             int bytesRead = reader.read(array);
-            initializeEncryptAlphabet(alphabet, key, array, bytesRead);
+            cipherAlgorithm.initializeEncryptAlphabet(cipherAlgorithm, cipherMode, alphabet, key, array, bytesRead);
             while (bytesRead != -1) {
                 array = cipherAlgorithm.encrypt(array, bytesRead);
                 writer.write(array, 0, bytesRead);
@@ -23,20 +23,5 @@ public class Cipher extends CipherData {
             throw new RuntimeException(e);
         }
 
-    }
-
-    private void initializeEncryptAlphabet(Alphabet alphabet, String key, char[] array, int bytesRead) {
-        cipherAlgorithm.setAlphabet(alphabet);
-        int modifyKey = initializeKey(key, array, bytesRead);
-        alphabet.initializeAlphabet(modifyKey);
-    }
-
-    private int initializeKey(String key, char[] chars, int bytesRead) {
-        int modifyKey = switch (cipherMode) {
-            case ENCRYPT -> cipherAlgorithm.getEncryptKey(key);
-            case DECRYPT -> cipherAlgorithm.getDecryptKey(key);
-            case BRUTE_FORCE -> cipherAlgorithm.getBruteForceKey(chars, bytesRead);
-        };
-        return modifyKey;
     }
 }
