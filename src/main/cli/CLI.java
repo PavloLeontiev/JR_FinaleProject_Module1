@@ -52,6 +52,7 @@ public class CLI {
                                  DECRYPT - to decrypt data;
                                  BRUTE_FORCE - to decrypt without key(just for CaesarCipher)
                                 
+                                
                 """);
         return scanner.nextLine();
     }
@@ -63,8 +64,14 @@ public class CLI {
                 If you want to create a file now and enter text, enter YES
                 or, if you already have a file with text, enter NO.
                      
+                     
                 """);
-        return scanner.nextLine();
+        String result = switch (scanner.nextLine().toUpperCase()) {
+            case "YES" -> "YES";
+            case "NO" -> "NO";
+            default -> getUserChoice();
+        };
+        return result;
     }
 
     private static String getNotepadFilePathArgument(String mode) {
@@ -104,8 +111,10 @@ public class CLI {
 
     private static void getSureSaveFile() {
         System.out.println("""
+                     
                                                 
                 Did you save file? Enter YES / NO
+                    
                                 
                 """);
         switch (scanner.nextLine().toUpperCase()) {
@@ -113,6 +122,7 @@ public class CLI {
                 break;
             case "NO":
                 getSureSaveFile();
+                break;
             default:
                 System.out.println("Enter YES / NO !");
                 getSureSaveFile();
@@ -142,7 +152,7 @@ public class CLI {
                                         
                                         
                 Please enter your key:
-                № | Encryption method       | Possible key
+                 № | Encryption method       | Possible key
                 -------------------------------------------------------------------
                 1) | CaesarCipher            | 0-∞
                 2) | VigenereCipher          | Any word(without numbers and symbols)
@@ -155,7 +165,7 @@ public class CLI {
                                         
                                         
                 Please enter your key:
-                № | Encryption method       | Possible key
+                 № | Encryption method       | Possible key
                 -------------------------------------------------------------------
                 1) | Brute force for Caesar  | Caesar
                 2) | Brute force for Vigenere| Vigenere(don`t work)

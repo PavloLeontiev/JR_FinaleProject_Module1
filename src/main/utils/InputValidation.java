@@ -32,6 +32,7 @@ public class InputValidation {
 
 
     private static CipherAlgorithm validationAlgorithm(String key, CipherMode mode) {
+        System.out.println(key);
         if (mode == CipherMode.ENCRYPT || mode == CipherMode.DECRYPT) {
             if (key.matches("^[0-9]*$")) {
                 return new CaesarCipher();
