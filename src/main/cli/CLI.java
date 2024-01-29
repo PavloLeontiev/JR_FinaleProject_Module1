@@ -68,7 +68,7 @@ public class CLI {
     }
 
     private static String getNotepadFilePathArgument(String mode) {
-        String name = "renameMe";
+        String name = "renameMe.txt";
         String fileName = switch (mode.toUpperCase()) {
             case "ENCRYPT" -> name;
             case "DECRYPT", "BRUTE_FORCE" -> FileHandler.fileNameEncrypt(name);
@@ -143,10 +143,10 @@ public class CLI {
                                         
                 Please enter your key:
                 № | Encryption method       | Possible key
-                        -------------------------------------------------------------------
-                        1) | CaesarCipher            | 0-∞
-                        2) | VigenereCipher          | Any word(without numbers and symbols)
-                          |                         | (don`t work)
+                -------------------------------------------------------------------
+                1) | CaesarCipher            | 0-∞
+                2) | VigenereCipher          | Any word(without numbers and symbols)
+                   |                         | (don`t work)
                                              
                 """);
                 break;
@@ -154,13 +154,13 @@ public class CLI {
                 System.out.println("""
                                         
                                         
-                        Please enter your key:
-                        № | Encryption method       | Possible key
-                        -------------------------------------------------------------------
-                        1) | Brute force for Caesar  | Caesar
-                        2) | Brute force for Vigenere| Vigenere(don`t work)
-                        3) | Brute force             |
-                            default (CaeserCipher)  | Just press ENTER (without argument)
+                Please enter your key:
+                № | Encryption method       | Possible key
+                -------------------------------------------------------------------
+                1) | Brute force for Caesar  | Caesar
+                2) | Brute force for Vigenere| Vigenere(don`t work)
+                3) | Brute force             |
+                     default (CaeserCipher)  | Just press ENTER (without argument)
                              
                         """);
                 break;

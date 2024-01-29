@@ -6,6 +6,9 @@ public abstract class Alphabet {
     private final static ArrayList<Alphabet> ALPHABETS = new ArrayList<>(
             Arrays.asList(new EnglishAlphabet(), new UkrainianAlphabet())
     );
+    public abstract ArrayList<Character> getUPPERCASE_ENGLISH_ALPHABET_ARRAY();
+
+    public abstract ArrayList<Character> getLOWERCASE_ENGLISH_ALPHABET_ARRAY();
 
     public abstract LinkedHashMap<Character, Character> getUPPERCASE_ALPHABET_LETTERS();
 
